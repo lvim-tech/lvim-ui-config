@@ -1,6 +1,6 @@
 local custom_select = require("nui.menu")
 local event = require("nui.utils.autocmd").event
-local popup_reference = nil
+local reference = nil
 
 local calculate_popup_width = function(entries, prompt)
 	local result = 6
@@ -69,19 +69,19 @@ local function nui_select(entries, stuff, on_user_choice, position)
 			winhighlight = "Normal:NuiBody",
 		},
 	}
-	popup_reference = custom_select(select_options, {
+	reference = custom_select(select_options, {
 		lines = formatted_entries,
 		on_close = function()
-			popup_reference = nil
+			reference = nil
 		end,
 		on_submit = function(item)
 			userChoice(item)
-			popup_reference = nil
+			reference = nil
 		end,
 	})
 	pcall(function()
-		popup_reference:mount()
-		popup_reference:on(event.BufLeave, popup_reference.menu_props.on_close, { once = true })
+		reference:mount()
+		reference:on(event.BufLeave, reference.menu_props.on_close, { once = true })
 	end)
 end
 

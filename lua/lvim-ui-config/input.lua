@@ -1,6 +1,6 @@
 local custom_input = require("nui.input")
 local event = require("nui.utils.autocmd").event
-local popup_reference = nil
+local reference = nil
 
 local calculate_popup_width = function(default, prompt)
 	local result = 40
@@ -37,23 +37,23 @@ local function nui_input(opts, on_confirm)
 			winhighlight = "Normal:NuiBody",
 		},
 	}
-	popup_reference = custom_input(popup_options, {
+	reference = custom_input(popup_options, {
 		prompt = "➤ ",
 		default_value = opts.default,
 		on_close = function()
-			popup_reference = nil
+			reference = nil
 		end,
 		on_submit = function(value)
 			on_confirm(value)
-			popup_reference = nil
+			reference = nil
 		end,
 	})
 	pcall(function()
-		popup_reference:mount()
-		popup_reference:map("n", "<esc>", popup_reference.input_props.on_close, { noremap = true })
-		popup_reference:map("n", "q", popup_reference.input_props.on_close, { noremap = true })
-		popup_reference:map("i", "<esc>", popup_reference.input_props.on_close, { noremap = true })
-		popup_reference:on(event.BufLeave, popup_reference.input_props.on_close, { once = true })
+		reference:mount()
+		reference:map("n", "<esc>", reference.input_props.on_close, { noremap = true })
+		reference:map("n", "q", reference.input_props.on_close, { noremap = true })
+		reference:map("i", "<esc>", reference.input_props.on_close, { noremap = true })
+		reference:on(event.BufLeave, reference.input_props.on_close, { once = true })
 	end)
 end
 
