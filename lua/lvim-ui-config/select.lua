@@ -58,7 +58,7 @@ local function nui_select(entries, stuff, on_user_choice, position)
 			height = #formatted_entries,
 		},
 		border = {
-			highlight = "NuiBorder",
+			highlight = "LvimSelectBorder",
 			style = { " ", " ", " ", " ", " ", " ", " ", " " },
 			text = {
 				top = stuff.prompt or "Choice:",
@@ -66,7 +66,7 @@ local function nui_select(entries, stuff, on_user_choice, position)
 			},
 		},
 		win_options = {
-			winhighlight = "Normal:NuiBody",
+			winhighlight = "Normal:LvimSelectNormal",
 		},
 	}
 	reference = custom_select(select_options, {

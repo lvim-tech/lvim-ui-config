@@ -26,7 +26,7 @@ local function nui_input(opts, on_confirm)
 			width = calculate_popup_width(opts.default, opts.prompt),
 		},
 		border = {
-			highlight = "NuiBorder",
+			highlight = "LvimInputBorder",
 			style = { " ", " ", " ", " ", " ", " ", " ", " " },
 			text = {
 				top = opts.prompt,
@@ -34,7 +34,7 @@ local function nui_input(opts, on_confirm)
 			},
 		},
 		win_options = {
-			winhighlight = "Normal:NuiBody",
+			winhighlight = "Normal:LvimInputNormal",
 		},
 	}
 	reference = custom_input(popup_options, {
