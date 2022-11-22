@@ -1,0 +1,8 @@
+{
+    "neodev": {
+        "library": {
+            "enabled": true,
+            "plugins": ["lvim-ui-config", "nui.nvim", "nvim-notify"]
+        }
+    }
+}
