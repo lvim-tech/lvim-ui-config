@@ -14,7 +14,7 @@ local function nui_popup(title, file, ft)
 			height = "60%",
 		},
 		border = {
-			highlight = "LvimPopupBorder",
+			highlight = "NormalFloat:LvimPopupBorder",
 			style = { "", " ", "", "", "", "", "", "" },
 			text = {
 				top = title,
