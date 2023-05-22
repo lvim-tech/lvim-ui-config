@@ -1,5 +1,6 @@
 local utils = require("lvim-ui-config.utils")
 local popup = require("nui.popup")
+local text = require("nui.text")
 local event = require("nui.utils.autocmd").event
 local reference = nil
 
@@ -17,7 +18,7 @@ local function nui_popup(title, file, ft)
 			highlight = "NormalFloat:LvimPopupBorder",
 			style = { "", " ", "", "", "", "", "", "" },
 			text = {
-				top = title,
+				top = text(title, "LvimSelectBorder"),
 				top_align = "center",
 			},
 		},

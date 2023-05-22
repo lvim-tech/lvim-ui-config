@@ -1,4 +1,5 @@
 local custom_select = require("nui.menu")
+local text = require("nui.text")
 local event = require("nui.utils.autocmd").event
 local reference = nil
 
@@ -61,7 +62,7 @@ local function nui_select(entries, stuff, on_user_choice, position)
 			highlight = "NormalFloat:LvimSelectBorder",
 			style = { " ", " ", " ", " ", " ", " ", " ", " " },
 			text = {
-				top = stuff.prompt or "Choice:",
+				top = text(stuff.prompt or "Choice:", "LvimSelectBorder"),
 				top_align = "center",
 			},
 		},

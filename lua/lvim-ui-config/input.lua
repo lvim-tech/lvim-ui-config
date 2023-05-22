@@ -1,4 +1,5 @@
 local custom_input = require("nui.input")
+local text = require("nui.text")
 local event = require("nui.utils.autocmd").event
 local reference = nil
 
@@ -29,7 +30,7 @@ local function nui_input(opts, on_confirm)
 			highlight = "NormalFloat:LvimInputBorder",
 			style = { " ", " ", " ", " ", " ", " ", " ", " " },
 			text = {
-				top = opts.prompt,
+				top = text(opts.prompt, "LvimInputBorder"),
 				top_align = "center",
 			},
 		},
