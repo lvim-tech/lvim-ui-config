@@ -27,7 +27,7 @@ local function nui_input(opts, on_confirm)
 			width = calculate_popup_width(opts.default, opts.prompt),
 		},
 		border = {
-			highlight = "NormalFloat:LvimInputBorder",
+			highlight = "FloatBorder:LvimInputBorder",
 			style = { " ", " ", " ", " ", " ", " ", " ", " " },
 			text = {
 				top = text(opts.prompt, "LvimInputBorder"),
