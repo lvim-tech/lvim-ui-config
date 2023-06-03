@@ -1,51 +1,17 @@
 local custom_input = require("nui.input")
-local text = require("nui.text")
+local notify = require("lvim-ui-config.notify")
 local event = require("nui.utils.autocmd").event
 local reference = nil
 
-local calculate_popup_width = function(default, prompt)
-	local result = 40
-	if prompt ~= nil then
-		result = #prompt + 40
-	end
-	if default ~= nil then
-		if #default + 40 > result then
-			result = #default + 40
-		end
-	end
-	return result
-end
-
-local function nui_input(opts, on_confirm)
-	local popup_options = {
-		relative = "cursor",
-		position = {
-			row = 1,
-			col = 0,
-		},
-		size = {
-			width = calculate_popup_width(opts.default, opts.prompt),
-		},
-		border = {
-			highlight = "FloatBorder:LvimInputBorder",
-			style = { " ", " ", " ", " ", " ", " ", " ", " " },
-			text = {
-				top = text(opts.prompt, "LvimInputBorder"),
-				top_align = "center",
-			},
-		},
-		win_options = {
-			winhighlight = "Normal:LvimInputNormal",
-		},
-	}
-	reference = custom_input(popup_options, {
-		prompt = "➤ ",
+local function nui_input(opts, on_send)
+	reference = custom_input(opts, {
+		prompt = opts.prompt_prefix,
 		default_value = opts.default,
 		on_close = function()
 			reference = nil
 		end,
 		on_submit = function(value)
-			on_confirm(value)
+			on_send(value)
 			reference = nil
 		end,
 	})

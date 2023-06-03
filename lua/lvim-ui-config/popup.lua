@@ -1,44 +1,34 @@
-local utils = require("lvim-ui-config.utils")
 local popup = require("nui.popup")
-local text = require("nui.text")
+local notify = require("lvim-ui-config.notify")
+local utils = require("lvim-ui-config.utils")
 local event = require("nui.utils.autocmd").event
 local reference = nil
 
-local function nui_popup(title, file, ft)
-	local popup_options = {
-		enter = true,
-		focusable = true,
-		position = "50%",
-		relative = "editor",
-		size = {
-			width = "80%",
-			height = "60%",
-		},
-		border = {
-			highlight = "FloatBorder:LvimPopupBorder",
-			style = { "", " ", "", "", "", "", "", "" },
-			text = {
-				top = text(title, "LvimPopupBorder"),
-				top_align = "center",
-			},
-		},
-		buf_options = {
-			filetype = ft,
-		},
-		win_options = {
-			winhighlight = "Normal:LvimPopupNormal",
-		},
-	}
-	reference = popup(popup_options)
+local function nui_popup(opts, file, readonly, close_key)
+	if not utils.file_exists(file) then
+		notify.error("This file does not exist", {
+			title = "LVIM UI",
+		})
+		return
+	end
+	reference = popup(opts)
 	pcall(function()
 		reference:mount()
 		local lines = utils.readlines(file)
 		vim.api.nvim_buf_set_lines(reference.bufnr, 0, 1, false, lines)
+		if readonly then
+			vim.fn.setbufvar(reference.bufnr, "&modifiable", 0)
+			vim.fn.setbufvar(reference.bufnr, "&readonly", 1)
+		end
+		if close_key then
+			reference:map("n", close_key, function()
+				reference:unmount()
+			end, { noremap = true })
+		end
 		reference:on(event.WinLeave, function()
 			reference:unmount()
 		end)
 	end)
-	return reference
 end
 
 return nui_popup
