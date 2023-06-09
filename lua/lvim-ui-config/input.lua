@@ -1,5 +1,4 @@
 local custom_input = require("nui.input")
-local notify = require("lvim-ui-config.notify")
 local event = require("nui.utils.autocmd").event
 local reference = nil
 
